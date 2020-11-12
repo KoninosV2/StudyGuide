@@ -20,12 +20,6 @@
   <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 
-  <style>
-    a{
-  word-wrap: normal;
-}
-  </style>
-
 </head>
 
 <body id="page-top">
@@ -78,7 +72,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <?php 
               // Παίρνουμε όλες τις κατηγορίες μαθημάτων
-              $sql = "SELECT * FROM lesson_cat ORDER BY place";
+              $sql = "SELECT * FROM lesson_cat ORDER BY cat_order";
               $stmt = $pdo->prepare($sql);
               $stmt->execute();
               $categories = $stmt->fetchAll();
@@ -100,6 +94,21 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Εμφανίζεται όταν έχει συνδεθεί κάποιος καθηγητής -->
+      <?php if(isset($_SESSION['role'])): ?>
+        <!-- Heading -->
+        <div class="sidebar-heading">Διδασκόμενα Μαθηματα</div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link" href="teacher_lessons.php">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Μαθημάτα</span>
+          </a>
+        </li>
+      <?php endif; ?>
+
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
@@ -130,20 +139,11 @@
             <div class="topbar-divider d-none d-sm-block"></div>
 		
             <!-- Nav Item - User Information -->
-           	<?php if(isset($_SESSION['username'])): ?>
+           	<?php if(isset($_SESSION['role'])): ?>
               <li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <em class="fas fa-user-graduate d-lg-inline text-gray-600 mx"></em> <span class="mx-2 d-none d-lg-inline text-gray-600">
-                <?= $_SESSION['username'] ?></span> </a><!-- Dropdown - User Information -->
+                <?php echo $_SESSION['surname'] . ' ' . $_SESSION['name'] ?></span> </a><!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-left shadow animated--grow-in" aria-labelledby="userDropdown">
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Προφίλ
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Ρυθμίσεις
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="userlogout.php" data-toggle="modal" data-target="#logoutModal">
+                  <a class="dropdown-item" href="includes/handle_logout.php">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Αποσύνδεση
                   </a>

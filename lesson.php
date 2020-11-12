@@ -14,13 +14,16 @@
 
 
 		// Κατηγορία μαθήματος
-		$sql = "SELECT cat_title FROM lesson, lesson_cat WHERE cat_id = cat_short_title AND lesson_code = ?";
-		$stmt = $pdo->prepare($sql);
+		$sql1 = "SELECT cat_title FROM lesson_cat, lesson WHERE cat_id = cat_short_title AND lesson_code = ?";
+		$stmt = $pdo->prepare($sql1);
 		$stmt->execute([$lesson_id]);
-		$category = $stmt->fetch();
+		$cat = $stmt->fetch();
 
 		// Προαπαιτούμενα μαθήματος
-		$sql = "SELECT requirement_id, group_id FROM lesson_prereq, lesson  WHERE lesson_id = lesson_code AND lesson_code = ? ORDER BY group_id";
+		$sql = "SELECT requirement_id, group_id 
+						FROM lesson_prereq, lesson  
+						WHERE lesson.lesson_code = lesson_prereq.lesson_code 
+						AND lesson.lesson_code = ? ORDER BY group_id";
 		$stmt = $pdo->prepare($sql);
 		$stmt->execute([$lesson_id]);
 		$requirments = $stmt->fetchAll();
@@ -38,9 +41,12 @@
 		$where_teach = $stmt->fetch();
 
 		// Βιβλιογραφία μαθήματος
-		$sql = "SELECT * FROM book, book2lesson WHERE book_id = id AND lesson_id = ? 
-						UNION
-						SELECT * FROM book, book2lesson_en WHERE book_id = id AND lesson_id = ?";
+		$sql = "SELECT * FROM (
+			SELECT * FROM book, book2lesson WHERE book_id = id AND lesson_code = ? 
+			UNION
+			SELECT * FROM book, book2lesson_en WHERE book_id = id AND lesson_code = ?
+			) a
+			order by book_order";
 		$stmt = $pdo->prepare($sql);
 		$stmt->execute([$lesson_id, $lesson_id]);
 		$books = $stmt->fetchAll();
@@ -63,7 +69,7 @@
           	<div class="card-body">
           		<div class="row mb-3">
 				        <div class="lesson-category font-weight-bold text-gray-800">Κατηγορία: 
-									<span class="font-weight-normal"><?php echo $category['cat_title']; ?></span>
+									<span class="font-weight-normal"><?php echo $cat['cat_title']; ?></span>
 								</div>
 							</div>
 							<div class="row mb-3">
@@ -262,6 +268,9 @@
 								<li class="nav-item">
 									<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-organize" role="tab" aria-controls="pills-profile" aria-selected="false">Οργάνωση Διδασκαλίας</a>
 								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-program" role="tab" aria-controls="pills-profile" aria-selected="false">Πρόγραμμα</a>
+								</li>
 							</ul>
 						</div>
 						<div class="card-body">
@@ -290,7 +299,6 @@
 								</div>
 								<!-- Οργάνωση διδασκαλίας -->
 								<div class="tab-pane fade" id="pills-organize" role="tabpanel">
-					
 									<div class="row mb-3">
 										<ul class="my-list">
 											<?php 
@@ -315,11 +323,40 @@
 													}
 													echo "<li>";
 													echo "<span class='font-weight-bold'>Σύνολο</span>";
-													echo "<span class='font-weight-bold right'>" . $total_hours . " ώρες</span>";
-													
+													echo "<span class='font-weight-bold right'>" . $total_hours . " ώρες</span>";		
 											?>		
 										</ul>
 									</div>
+								</div>
+								<!-- Εβδομαδιαίο Πρόγραμμα -->
+								<div class="tab-pane fade" id="pills-program" role="tabpanel">
+									<table class="table table-striped">
+										<thead class="table-primary">
+											<tr>
+												<th scope="col">Εβδ.</th>
+												<th scope="col">Τίτλος Ενότητας</th>
+												<th scope="col">Βιβλιογραφία</th>
+												<th scope="col">Σύνδεσμος Παρουσίασης</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php 
+												$sql = "SELECT * FROM section2lesson WHERE lesson_code = ?";
+												$stmt = $pdo->prepare($sql);
+												$stmt->execute([$lesson_id]);
+												$weeks = $stmt->fetchAll();
+												foreach($weeks as $week){
+													echo "<tr>";
+													echo "<th scope='row'>{$week['section']}</th>";
+													echo "<td>{$week['descr']}</td>";
+													echo "<td>{$week['reference']}</td>";
+													echo "<td><a href='{$week['url']}'>Διαλέξεις</a></td>";
+													echo "</tr>";
+												}
+											?>
+										</tbody>
+											
+									</table>
 								</div>
 							</div>
 						</div>	
@@ -334,11 +371,16 @@
 								<ol>
 									<?php
 										foreach($books as $book){
-											echo "<li>";
-											echo $book['authors'] . ", " . $book['title'] . ', ' . $book['edition'] . ', ';
-											echo $book['publisher'] . ', ' . $book['year'] . ', Κωδικός στον Εύδοξο: ' . $book['eudoxus_id'];
-											echo "</li>";
-				
+											if($book['id'] === "articles" || $book['id'] === "notes"){
+												echo "<li>";
+												echo $book['title'];
+												echo "</li>";
+											}else{
+												echo "<li>";
+												echo $book['authors'] . ", " . $book['title'] . ', ' . $book['edition'] . ', ';
+												echo $book['publisher'] . ', ' . $book['year'] . ', Κωδικός στον Εύδοξο: ' . $book['eudoxus_id'];
+												echo "</li>";
+											}
 										}
 									?>
 								</ol>

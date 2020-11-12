@@ -15,3 +15,16 @@ tr.hover {
 .my-list li:last-child {
   margin-top: 2rem;
 }
+
+/* .edit-lesson form .form-group {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+} */
+
+.delete-item {
+  color: red;
+}
+.delete-item:hover {
+  cursor: pointer;
+}
