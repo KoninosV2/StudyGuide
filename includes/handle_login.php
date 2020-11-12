@@ -19,12 +19,14 @@
     $_SESSION['surname'] = $teacher['surname'];
     $_SESSION['email'] = $teacher['email'];
 
-    if($teacher['id'] == 'Μαλαμάτος')
+    if($teacher['id'] == 'Μαλαμάτος'){
       $_SESSION['role'] = 'admin';
-    else
+    }  
+    else{
       $_SESSION['role'] = 'user';
-    
+    }
     header("Location: ../teacher_lessons.php");
+    
   }else{
     header("Location: ../login.php");
   }

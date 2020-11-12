@@ -57,7 +57,8 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="index.php">
-          <i class="fas fa-fw fa-book"></i>
+          <!-- <i class="fas fa-fw fa-book"></i> -->
+          <i class="fas fa-fw fa-bookmark"></i>
           <span>Λίστα Μαθημάτων</span>
         </a>
       </li>
@@ -103,10 +104,62 @@
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
           <a class="nav-link" href="teacher_lessons.php">
-            <i class="fas fa-fw fa-book"></i>
+            <i class="fas fa-fw fa-bookmark"></i>
             <span>Μαθημάτα</span>
           </a>
         </li>
+      <?php endif; ?>
+
+      <!-- Εμφανίζεται όταν έχει συνδεθεί κάποιος καθηγητής -->
+      <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+        <!-- Heading -->
+        <div class="sidebar-heading">Διαχείριση</div>
+        <!-- Διαχείριση Μαθημάτων -->
+        <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#manageCourse" aria-expanded="true" aria-controls="collapsePages">
+        <i class="fas fa-fw fa-bookmark"></i>
+          <span>Μαθημάτων</span>
+        </a>
+        <div id="manageCourse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class='collapse-item' href='admin_courses.php'>Μαθήματα</a>
+            <a class='collapse-item' href='admin_course_categories.php'>Κατηγορίες Μαθημάτων</a>
+            <a class='collapse-item' href='admin_course_types.php'>Τύποι Μαθημάτων</a>
+            <a class='collapse-item' href='admin_course_where_teaching.php'>Τρόποι Παράδοσης</a>
+            <a class='collapse-item' href='admin_course_abilities.php'>Αποκτόμενες Ικανότητες</a>
+            <a class='collapse-item' href='admin_course_assessment_methods.php'>Μέθοδοι Αξιολόγησης</a>
+            <a class='collapse-item' href='admin_course_teaching_methods.php'>Μέθοδοι Διδασκαλίας</a>
+            <a class='collapse-item' href='admin_course_tech_methods.php'>Τεχνολογίες Διδασκαλίας</a>
+          </div>
+        </div>
+      </li>
+      <!-- Διαχείριση Συγγραμμάτων -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#manageBooks" aria-expanded="true" aria-controls="collapsePages">
+        <i class="fas fa-fw fa-book"></i>
+          <span>Συγγραμμάτων</span>
+        </a>
+        <div id="manageBooks" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class='collapse-item' href='admin_books.php'>Βιβλιογραφία</a>
+          </div>
+        </div>
+      </li>
+      <!-- Διαχείριση Καθηγητών -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#manageTeachers" aria-expanded="true" aria-controls="collapsePages">
+        <i class="fas fa-fw fa-chalkboard-teacher"></i>
+          <span>Καθηγητών</span>
+        </a>
+        <div id="manageTeachers" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class='collapse-item' href='admin_teachers.php'>Καθηγητές</a>
+            <a class='collapse-item' href='#'>Ανάθεση Μαθημάτων</a>
+          </div>
+        </div>
+      </li>
       <?php endif; ?>
 
 

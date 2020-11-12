@@ -2,8 +2,8 @@
 session_start();
 $host = 'localhost';
 $dbname = 'dit13023_app';
-$user = "dit13023";
-$pass = "2441995KoN!";
+$user = "root";
+$pass = "";
 try {
     $dsn = "mysql:host=$host;dbname=$dbname";
     $pdo = new PDO($dsn, $user, $pass);

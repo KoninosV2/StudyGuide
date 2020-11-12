@@ -28,3 +28,14 @@ tr.hover {
 .delete-item:hover {
   cursor: pointer;
 }
+
+/* .editTable tbody tr td:last-child,
+.editTable tbody tr td:nth-child(4),
+.editTable thead th {
+  text-align: center;
+} */
+
+.editTable tbody tr td.editField,
+.editTable thead th {
+  text-align: center;
+}
