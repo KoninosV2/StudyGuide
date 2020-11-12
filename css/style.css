@@ -1,0 +1,17 @@
+tr.hover {
+  cursor: pointer;
+}
+.my-list li {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-list li .right {
+  margin-left: 3.5rem;
+  text-align: center;
+}
+
+.my-list li:last-child {
+  margin-top: 2rem;
+}

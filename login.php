@@ -1,9 +1,5 @@
 <?php
-	include 'dbcon.php';
-	if(isset($_SESSION['username'])){
-		header("Location: index.php", true, 301);
-		exit();
-	}
+	include 'includes/dbcon.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>LDAP Login</title>
+  <title>Course Guide | Σύνδεση</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -60,13 +56,7 @@
                     </div>
                     <input name="login" type="submit" class="btn btn-primary btn-user btn-block"></input>
                     </form>
-                  <hr>
-                  <div class="text-center">
-                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                  </div>
-                  <div class="text-center">
-                    <a class="small" href="register.html">Create an Account!</a>
-                  </div>
+                 
               </div>
               </div>
             </div>
