@@ -450,7 +450,7 @@ if (isset($_GET['lesson_id'])) {
 						else {
 							$book_details = $book['authors'] . ", <b>" .
 								$book['title'] . '</b>, ' .
-								$book['edition'] . 
+								$book['edition'] .
 								'η έκδοση, ' . $book['publisher'] . ', ' .
 								$book['year'] .
 								', Κωδικός στον Εύδοξο: ' . $book['eudoxus_id'];
