@@ -33,10 +33,11 @@
     $surname_eng = $_POST['teacher-surname-eng'];
     $name_eng = $_POST['teacher-name-eng'];
     $lvl_eng = $_POST['teacher-position-eng'];
+    $teacher_role = $_POST['teacher-role'];
 
-    $sql = 'INSERT INTO teacher (id, name, surname, lvl, email, phone, notes, name_eng,       surname_eng, lvl_eng) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    $sql = 'INSERT INTO teacher (id, name, surname, lvl, email, phone, notes, name_eng,       surname_eng, lvl_eng, role) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$id, $name, $surname, $lvl, $email, $phone, $notes, $name_eng, $surname_eng, $lvl_eng]);
+    $stmt->execute([$id, $name, $surname, $lvl, $email, $phone, $notes, $name_eng, $surname_eng, $lvl_eng, $teacher_role]);
     header("Location: " . $_SERVER['PHP_SELF']);
   }
 ?>
@@ -76,54 +77,65 @@
           </p>
           <div class="collapse" id="newTeacher">
             <div class="card card-body">
-              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" id="new-teacher-form">
+                <div class="form-row error-message error-new-teacher">
+									<div class="alert alert-danger" role="alert">
+									</div>
+							  </div>
                 <div class="form-row">
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-3 required">
                     <label for="teacher-id" class="font-weight-bold text-gray-800 col-form-label">Κωδικός:</label>
-                    <input type="text" class="form-control" name="teacher-id">
+                    <input type="text" class="form-control" name="teacher-id" id="teacher-id">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-3 required">
                     <label for="teacher-surname" class="font-weight-bold text-gray-800 col-form-label">Έπώνυμο:</label>
-                    <input type="text" class="form-control" name="teacher-surname">
+                    <input type="text" class="form-control" name="teacher-surname" id="teacher-surname">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-3 required">
                     <label for="teacher-name" class="font-weight-bold text-gray-800 col-form-label">Όνομα:</label>
-                    <input type="text" class="form-control" name="teacher-name">
+                    <input type="text" class="form-control" name="teacher-name" id="teacher-name">
+                  </div>
+                  <div class="form-group col-md-3 required">
+                    <label for="teacher-role" class="font-weight-bold text-gray-800 col-form-label">Ρόλος:</label>
+                    <select name="teacher-role" id="teacher-role" class="form-control">
+                      <option value="user">Χρήστης</option>
+                      <option value="admin">Admin</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                   <label for="teacher-position" class="font-weight-bold text-gray-800 col-form-label">Θέση:</label>
-                    <input type="text" class="form-control" name="teacher-position">
+                    <input type="text" class="form-control" name="teacher-position" id="teacher-position">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="teacher-email" class="font-weight-bold text-gray-800 col-form-label">Email:</label>
-                    <input type="text" class="form-control" name="teacher-email">
+                    <input type="text" class="form-control" name="teacher-email" id="teacher-email">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="teacher-phone" class="font-weight-bold text-gray-800 col-form-label">Τηλέφωνο:</label>
-                    <input type="text" class="form-control" name="teacher-phone">
+                    <input type="text" class="form-control" name="teacher-phone" id="teacher-phone"> 
                   </div>
                 </div>
                 <div class="form-row">
-                  <label for="teacher-notes" class="font-weight-bold text-gray-800 col-form-label">Παρατηρήσεις:</label>
-                  <textarea class="form-control" name="teacher-notes" cols="20" rows="3"></textarea>
-                </div>
-                <div class="form-row mt-3">
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="teacher-surname-eng" class="font-weight-bold text-gray-800 col-form-label">Επώνυμο (ΕΝ):</label>
-                    <input type="text" class="form-control" name="teacher-surname-eng">
+                    <input type="text" class="form-control" name="teacher-surname-eng" id="teacher-surname-eng">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="teacher-name-eng" class="font-weight-bold text-gray-800 col-form-label">Όνομα (ΕΝ):</label>
-                    <input type="text" class="form-control" name="teacher-name-eng">
+                    <input type="text" class="form-control" name="teacher-name-eng" id="teacher-name-eng">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="teacher-positition-eng" class="font-weight-bold text-gray-800 col-form-label">Θέση (ΕΝ):</label>
-                    <input type="text" class="form-control" name="teacher-position-eng">
+                    <input type="text" class="form-control" name="teacher-position-eng" id="teacher-position-eng">
                   </div>
                 </div>      
-                <div class="form-group">
+                <div class="form-row">
+                  <label for="teacher-notes" class="font-weight-bold text-gray-800 col-form-label">Παρατηρήσεις:</label>
+                  <textarea class="form-control" name="teacher-notes" id="teacher-notes" cols="20" rows="3"></textarea>
+                </div>
+                <div class="form-group mt-3">
                   <input type="submit" class="btn btn-success float-right" name="submit">
                 </div>
               </form>
@@ -139,6 +151,7 @@
                     <th>Όνομα</th>
                     <th>Θέση</th>
                     <th>Email</th>
+                    <th>Ρόλος</th>
                     <th>Τροποποίση</th>
                     <th>Διαγραφή</th>
                   </tr>
@@ -153,7 +166,8 @@
                         <td><?php echo $teacher['name']; ?></td>
                         <td><?php echo $teacher['lvl']; ?></td>
                         <td><?php echo $teacher['email']; ?></td>
-                        <td class='editField'><a href="edit_teacher.php?teacher_id=<?php echo $teacher['id'];?>"><i class="far fa-edit"></i></a></td>
+                        <td><?php echo $teacher['role']==="user"?"Χρήστης":"Admin"; ?></td>
+                        <td class='editField'><a href="edit_teacher.php?teacher_id=<?php echo $teacher['id'];?>"><i class="far fa-edit text-warning"></i></a></td>
                         <td class='editField'><a href="admin_teachers.php?teacher_id=<?php echo $teacher['id'];?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις τον συγκεκριμένο καθηγητή;');"><i class='fas fa-trash-alt delete-item'></i></td>
                       </tr>
 					          <?php endforeach; ?>
@@ -173,9 +187,13 @@
     $('#adminCourseTable').DataTable();
 	});
 
-  $('tbody>tr').click( function() {
-    window.location = $(this).find('a').attr('href');
-    }).hover( function() {
-    $(this).toggleClass('hover');
+  $('tbody tr td:not(:last-child, :nth-child(6))').click( function() {
+    var tr = $(this).closest('tr');
+    window.location = tr.find('a').attr('href');
+  });
+  $('tbody tr td:not(:last-child, :nth-child(6))').hover(function() {
+    var tr = $(this).closest('tr');
+   tr.toggleClass('hover');
+    console.log($(this));
   });
 </script>

@@ -31,7 +31,6 @@
 ?>
 
 <?php
-  // Πλήθος Μαθηματων
   $sql = "SELECT * FROM book";
   $stmt = $pdo->prepare($sql);
   $stmt->execute();
@@ -73,41 +72,49 @@
           </p>
           <div class="collapse" id="newBook">
             <div class="card card-body">
-              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" id="new-book-form"> 
+                <div class="form-row error-message error-new-book">
+									<div class="alert alert-danger" role="alert">
+									</div>
+							  </div>
                 <div class="form-row">
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="book-id" class="font-weight-bold text-gray-800 col-form-label">Κωδικός:</label>
-                    <input type="text" class="form-control" name="book-id">
+                    <input type="text" class="form-control" name="book-id" id="book-id">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-8 required">
+                    <label for="book-title" class="font-weight-bold text-gray-800 col-form-label">Τίτλος Συγγράμματος</label>
+                    <input type="text" class="form-control" name="book-title" id="book-title">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
                     <label for="book-edition" class="font-weight-bold text-gray-800 col-form-label">Έκδοση:</label>
-                    <input type="text" class="form-control" name="book-edition">
+                    <input type="text" class="form-control" name="book-edition" id="book-edition">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-6">
                     <label for="book-year" class="font-weight-bold text-gray-800 col-form-label">Έτος Έκδοσης:</label>
-                    <input type="text" class="form-control" name="book-year">
+                    <input type="text" class="form-control" name="book-year" id="book-year">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="book-title" class="font-weight-bold text-gray-800 col-form-label">Τίτλος Συγγράμματος</label>
-                  <input type="text" class="form-control" name="book-title">
-                </div>
+                
                 <div class="form-group">
                   <label for="book-authors" class="font-weight-bold text-gray-800 col-form-label">Συγγραφείς:</label>
-                  <input type="text" class="form-control" name="book-authors">
+                  <input type="text" class="form-control" name="book-authors" id="book-authors">
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="book-editor" class="font-weight-bold text-gray-800 col-form-label">Εκδότης:</label>
-                    <input type="text" class="form-control" name="book-editor">
+                    <input type="text" class="form-control" name="book-editor" id="book-editor">
                   </div>
                   <div class="form-group col-md-4">
                     <label for="book-eudoxus-id" class="font-weight-bold text-gray-800 col-form-label">Κωδικός στον Εύδοξο:</label>
-                    <input type="text" class="form-control" name="book-eudoxus-id">
+                    <input type="text" class="form-control" name="book-eudoxus-id" id="book-eudoxus-id">
                   </div>
                   <div class="form-group col-md-4">
                     <label for="book-isbn" class="font-weight-bold text-gray-800 col-form-label">ISBN:</label>
-                    <input type="text" class="form-control" name="book-isbn">
+                    <input type="text" class="form-control" name="book-isbn" id="book-isbn">
                   </div>
                 </div>
                 <div class="form-group">
@@ -138,7 +145,7 @@
                         <td><a href=book.php?book_id=<?php echo $book['id']; ?> class="text-gray-600"><?php echo $book['id']; ?></a></td>
                         <td><?php echo $book['title']; ?></td>
                         <td><?php echo $book['authors']; ?></td>
-                        <td class='editField'><a href="edit_book.php?book_id=<?php echo $book['id'];?>"><i class="far fa-edit"></i></a></td>
+                        <td class='editField'><a href="edit_book.php?book_id=<?php echo $book['id'];?>"><i class="far fa-edit text-warning"></i></a></td>
                         <td class='editField'><a href="admin_books.php?book_id=<?php echo $book['id'];?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις το συγκεκριμένο βιβλίο;');"><i class='fas fa-trash-alt delete-item'></i></td>
                       </tr>
 					          <?php endforeach; ?>
@@ -158,9 +165,13 @@
     $('#adminCourseTable').DataTable();
 	});
 
-  $('tbody>tr').click( function() {
-    window.location = $(this).find('a').attr('href');
-    }).hover( function() {
-    $(this).toggleClass('hover');
+  $('tbody tr td:not(:last-child, :nth-child(4))').click( function() {
+    var tr = $(this).closest('tr');
+    window.location = tr.find('a').attr('href');
+  });
+  $('tbody tr td:not(:last-child, :nth-child(4))').hover(function() {
+    var tr = $(this).closest('tr');
+   tr.toggleClass('hover');
+    console.log($(this));
   });
 </script>

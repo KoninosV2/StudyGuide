@@ -72,21 +72,25 @@
           </p>
           <div class="collapse" id="newTeachingMethod">
             <div class="card card-body">
-              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" id="new-teaching-method-form">
+                <div class="form-row error-message error-new-teaching-methods">
+									<div class="alert alert-danger" role="alert">
+									</div>
+							  </div>
                 <div class="form-row">
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="teaching-order" class="font-weight-bold text-gray-800 col-form-label">A/A:</label>
-                    <input type="text" class="form-control" name="teaching-order">
+                    <input type="text" class="form-control" name="teaching-order" id="teaching-order">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="teaching-short-title" class="font-weight-bold text-gray-800 col-form-label">Κωδικός:</label>
-                    <input type="text" class="form-control" name="teaching-short-title">
+                    <input type="text" class="form-control" id="teaching-short-title" name="teaching-short-title">
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-6 required">
                     <label for="teaching-title" class="font-weight-bold text-gray-800 col-form-label">Τίτλος:</label>
-                    <input type="text" class="form-control" name="teaching-title">
+                    <input type="text" class="form-control" id="teaching-title" name="teaching-title">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="teaching-title-en" class="font-weight-bold text-gray-800 col-form-label">Τίτλος (ΕΝ):</label>
@@ -123,7 +127,7 @@
                         <td><?php echo $method['teaching_short_title']; ?></td>
                         <td><?php echo $method['teaching_title']; ?></td>
                         <td><?php echo $method['teaching_title_eng']; ?></td>
-                        <td class='editField'><a href="edit_course_teaching_methods.php?teaching_id=<?php echo $method['teaching_short_title'];?>"><i class="far fa-edit"></i></a></td>
+                        <td class='editField'><a href="edit_course_teaching_methods.php?teaching_id=<?php echo $method['teaching_short_title'];?>"><i class="far fa-edit text-warning"></i></a></td>
                         <td class='editField'><a href="admin_course_teaching_methods.php?teaching_id=<?php echo $method['teaching_short_title'];?>"  onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις τη συγκεκριμένη μέθοδο διδασκαλίας;');"><i class='fas fa-trash-alt delete-item'></i></td>
                       </tr>
 					          <?php endforeach; ?>

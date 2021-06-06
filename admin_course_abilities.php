@@ -49,7 +49,7 @@
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Αποκτόμενες Ικανότητες</div>
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Αποκτώμενες Ικανότητες</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?php  echo $number_of_abilities; ?></div>
                   </div>
                   <div class="col-auto">
@@ -61,7 +61,7 @@
           </div>
 			  </div>
       <div class="my-3">
-        <h1 class="h3 mb-0 text-gray-800">Αποκτόμενες Ικανότητες</h1>
+        <h1 class="h3 mb-0 text-gray-800">Αποκτώμενες Ικανότητες</h1>
       </div>
       <!-- Πίνακας με τους τρόπους παράδοσης -->
       <div class="shadow">
@@ -73,25 +73,29 @@
           </p>
           <div class="collapse" id="newAbility">
             <div class="card card-body">
-              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" id="new-ability-form">
+                <div class="form-row error-message error-new-ability">
+									<div class="alert alert-danger" role="alert">
+									</div>
+							  </div>
                 <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label for="ability-short-title" class="font-weight-bold text-gray-800 col-form-label">A/A:</label>
-                    <input type="text" class="form-control" name="ability-order">
+                  <div class="form-group col-md-4 required">
+                    <label for="ability-order" class="font-weight-bold text-gray-800 col-form-label">A/A:</label>
+                    <input type="text" class="form-control" name="ability-order" id="ability-order">
                   </div>
-                  <div class="form-group col-md-4">
-                    <label for="ability-title" class="font-weight-bold text-gray-800 col-form-label">Κωδικός:</label>
-                    <input type="text" class="form-control" name="ability-short-title">
+                  <div class="form-group col-md-4 required">
+                    <label for="ability-short-title" class="font-weight-bold text-gray-800 col-form-label">Κωδικός:</label>
+                    <input type="text" class="form-control" name="ability-short-title" id="ability-short-title">
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="ability-title-en" class="font-weight-bold text-gray-800 col-form-label">Τίτλος:</label>
-                    <input type="text" class="form-control" name="ability-title">
+                  <div class="form-group col-md-6 required">
+                    <label for="ability-title" class="font-weight-bold text-gray-800 col-form-label">Τίτλος:</label>
+                    <input type="text" class="form-control" name="ability-title" id="ability-title">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="ability-title-en" class="font-weight-bold text-gray-800 col-form-label">Τίτλος (ΕΝ):</label>
-                    <input type="text" class="form-control" name="ability-title-en">
+                    <input type="text" class="form-control" name="ability-title-en" id="ability-title-eng">
                   </div>
                 </div>
                 <div class="form-group">
@@ -103,7 +107,7 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-              <table id="adminCategoriesTable" class="table table-bordered table-hover editTable" style="width:100%">
+              <table id="adminAbilitiesTable" class="table table-bordered table-hover editTable" style="width:100%">
                 <thead>
                   <tr>
                     <th>A/A</th>
@@ -124,7 +128,7 @@
                         <td><?php echo $ability['ability_short_title']; ?></td>
                         <td><?php echo $ability['ability_title']; ?></td>
                         <td><?php echo $ability['ability_title_eng']; ?></td>
-                        <td class='editField'><a href="edit_course_abilities.php?ability_id=<?php echo $ability['ability_short_title'];?>"><i class="far fa-edit"></i></a></td>
+                        <td class='editField'><a href="edit_course_abilities.php?ability_id=<?php echo $ability['ability_short_title'];?>"><i class="far fa-edit text-warning"></i></a></td>
                         <td class='editField'><a href="admin_course_abilities.php?ability_id=<?php echo $ability['ability_short_title'];?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις το αντικείμενο;');"><i class='fas fa-trash-alt delete-item'></i></td>
                       </tr>
 					          <?php endforeach; ?>
@@ -141,6 +145,6 @@
 <?php include "includes/footer.php"; ?>
 <script>
   $(document).ready( function () {
-    $('#adminCategoriesTable').DataTable();
+    $('#adminAbilitiesTable').DataTable();
 	});
 </script>
