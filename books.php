@@ -56,7 +56,7 @@
                       if($book['id'] !== "notes" && $book['id'] !== "articles"):
                   ?>  
                         <tr>
-                          <td><?php echo $book['id']; ?></a></td>
+                          <td><?php echo $book['eudoxus_id']; ?></a></td>
                           <td><?php echo $book['title']; ?></td>
                           <td><?php echo $book['authors']; ?></td>
                           <td><?php echo $book['publisher']; ?></td>
