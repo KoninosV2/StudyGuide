@@ -15,6 +15,12 @@
   // Διαγραφή Τύπου
   if(isset($_GET['type_id'])){
     $type_id = $_GET['type_id'];
+
+    $null = "ty-null";
+    $sql = "UPDATE type2lesson set type_id = ? WHERE type_id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$null,$type_id]);
+
     $sql = "DELETE FROM type WHERE type_short_title = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$type_id]);
@@ -72,19 +78,23 @@
           </p>
           <div class="collapse" id="newCourseType">
             <div class="card card-body">
-              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" id="new-type-form">
+                <div class="form-row error-message error-lesson-type">
+									<div class="alert alert-danger" role="alert">
+									</div>
+							  </div>
                 <div class="form-row">
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-2 required">
                     <label for="type-id" class="font-weight-bold text-gray-800 col-form-label">Κωδικός:</label>
-                    <input type="text" class="form-control" name="type-id">
+                    <input type="text" class="form-control" name="type-id" id="type-id">
                   </div>
-                  <div class="form-group col-md-5">
+                  <div class="form-group col-md-5 required">
                     <label for="type-title" class="font-weight-bold text-gray-800 col-form-label">Τίτλος:</label>
-                    <input type="text" class="form-control" name="type-title">
+                    <input type="text" class="form-control" name="type-title" id="type-title">
                   </div>
                   <div class="form-group col-md-5">
                     <label for="type-title-en" class="font-weight-bold text-gray-800 col-form-label">Τίτλος (ΕΝ):</label>
-                    <input type="text" class="form-control" name="type-title-en">
+                    <input type="text" class="form-control" name="type-title-en" id="type-title-en">
                   </div>
                 </div>
                 <div class="form-group">
@@ -115,7 +125,7 @@
                         <td><?php echo $type['type_short_title']; ?></td>
                         <td><?php echo $type['type_title']; ?></td>
                         <td><?php echo $type['type_title_eng']; ?></td>
-                        <td class='editField'><a href="edit_course_types.php?type_id=<?php echo $type['type_short_title'];?>"><i class="far fa-edit"></i></a></td>
+                        <td class='editField'><a href="edit_course_types.php?type_id=<?php echo $type['type_short_title'];?>"><i class="far fa-edit  text-warning"></i></a></td>
                         <td class='editField'><a href="admin_course_types.php?type_id=<?php echo $type['type_short_title'];?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις τον συγκεκριμένο τύπο μαθήματος;');"><i class='fas fa-trash-alt delete-item'></i></td>
                       </tr>
 					          <?php endforeach; ?>

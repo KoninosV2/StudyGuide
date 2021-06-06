@@ -66,26 +66,30 @@
         <div class="card-header py-3">
           <p>
             <a class="btn btn-primary" data-toggle="collapse" href="#newTech" role="button" aria-expanded="false" aria-controls="newTech">
-              Εισαγωγή
+              Νέα Τεχνολογία
             </a>
           </p>
           <div class="collapse" id="newTech">
             <div class="card card-body">
-              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" id="new-tech-methods-form">
+                <div class="form-row error-message error-new-tech-methods">
+						      <div class="alert alert-danger" role="alert">
+						      </div>
+					      </div>
                 <div class="form-row">
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="tech-order" class="font-weight-bold text-gray-800 col-form-label">A/A:</label>
-                    <input type="text" class="form-control" name="tech-order">
+                    <input type="text" class="form-control" id="tech-order" name="tech-order">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="tech-short-title" class="font-weight-bold text-gray-800 col-form-label">Κωδικός:</label>
-                    <input type="text" class="form-control" name="tech-short-title">
+                    <input type="text" class="form-control" id="tech-short-title" name="tech-short-title">
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-6 required">
                     <label for="tech-title" class="font-weight-bold text-gray-800 col-form-label">Τίτλος:</label>
-                    <input type="text" class="form-control" name="tech-title">
+                    <input type="text" class="form-control" id="tech-title" name="tech-title">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="tech-title-en" class="font-weight-bold text-gray-800 col-form-label">Τίτλος (ΕΝ):</label>
@@ -122,7 +126,7 @@
                         <td><?php echo $method['tech_short_title']; ?></td>
                         <td><?php echo $method['tech_title']; ?></td>
                         <td><?php echo $method['tech_title_eng']; ?></td>
-                        <td class='editField'><a href="edit_course_tech_methods.php?tech_id=<?php echo $method['tech_short_title'];?>"><i class="far fa-edit"></i></a></td>
+                        <td class='editField'><a href="edit_course_tech_methods.php?tech_id=<?php echo $method['tech_short_title'];?>"><i class="far fa-edit text-warning"></i></a></td>
                         <td class='editField'><a href="admin_course_tech_methods.php?tech_id=<?php echo $method['tech_short_title'];?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις τη συγκεκριμένη μέθοδο τεχνολογία;');"><i class='fas fa-trash-alt delete-item'></i></td>
                       </tr>
 					          <?php endforeach; ?>

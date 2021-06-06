@@ -33,28 +33,33 @@
       <?php echo $assessment['assessment_title']; ?> [<?php echo $assessment['assessment_short_title']; ?>]
 			</h1>
     </div>
-    <div class="card shadow border-warning mb-3">
+    <div class="card shadow mb-3">
       <div class="card-body edit-lesson">
-        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
-					<div class="form-row">
-						<div class="form-group col-md-2">
-							<label for="assessment-order" class="col-form-label font-weight-bold text-gray-800">A/A:</label>
-							<input type="text" name="assessment-order" class="font-weight-normal form-control" value="<?php echo $assessment['assessment_order']; ?>">
+        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" id="update-assessment-form">
+          <div class="form-row error-message error-update-assessment">
+						<div class="alert alert-danger" role="alert">
 						</div>
-            <div class="form-group col-md-2">
+					</div>
+          <div class="form-row">
+						<div class="form-group col-md-2 required">
+							<label for="assessment-order" class="col-form-label font-weight-bold text-gray-800">A/A:</label>
+							<input type="text" name="assessment-order" id="assessment-order" class="font-weight-normal form-control" value="<?php echo $assessment['assessment_order']; ?>" readonly>
+						</div>
+            <div class="form-group col-md-2 required">
 							<label for="assessment-short-title" class="col-form-label font-weight-bold text-gray-800">Κωδικός:</label>
-							<input type="text" name="assessment-short-title" class="font-weight-normal form-control" value="<?php echo $assessment['assessment_short_title']; ?>" readonly>
+							<input type="text" name="assessment-short-title" id="assessment-short-title" class="font-weight-normal form-control" value="<?php echo $assessment['assessment_short_title']; ?>" readonly>
 						</div>
           </div>
-						<div class="form-group">
+						<div class="form-group required">
 							<label for="assessment-title" class="col-form-label font-weight-bold text-gray-800">Τίτλος:</label>
-							<input type="text" name="assessment-title" class="font-weight-normal form-control" value="<?php echo $assessment['assessment_title']; ?>">
+							<input type="text" name="assessment-title" id="assessment-title" class="font-weight-normal form-control" value="<?php echo $assessment['assessment_title']; ?>">
 						</div>
             <div class="form-group">
 							<label for="assessment-title-en" class="col-form-label font-weight-bold text-gray-800">Τίτλος (EN):</label>
 							<input type="text" name="assessment-title-en" class="font-weight-normal form-control" value="<?php echo $assessment['assessment_title_eng']; ?>">
 						</div>
 					<button type="submit" name="assessment-update" class="btn btn-primary float-right">Ενημέρωση</button>
+          <input type="reset" class="btn btn-warning float-right mr-3" value="Επαναφορά">
         </form>
 			</div>
     </div>          	

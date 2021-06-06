@@ -5,6 +5,11 @@
 <?php
   if(isset($_GET['category_id'])){
     $category_id = $_GET['category_id'];
+
+    $sql = "SELECT cat_title FROM lesson_cat WHERE cat_short_title = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$category_id]);
+    $category_title = $stmt->fetch();
   }
 ?>
 <?php include "includes/header.php"; ?>
@@ -16,7 +21,7 @@
       <!-- Πίνακας Μαθημάτων -->
       <div class="shadow">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Μαθήματα Κορμού</h6>
+            <h6 class="m-0 font-weight-bold text-primary"><?php echo $category_title['cat_title']; ?></h6>
         </div>
         <div class="card-body">
           <div class="table-responsive">

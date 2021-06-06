@@ -69,21 +69,25 @@
           </p>
           <div class="collapse" id="newAssessment">
             <div class="card card-body">
-              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" id="new-assessment-form">
+                <div class="form-row error-message error-new-assessment">
+									<div class="alert alert-danger" role="alert">
+									</div>
+							  </div>
                 <div class="form-row">
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="assessment-order" class="font-weight-bold text-gray-800 col-form-label">A/A:</label>
-                    <input type="text" class="form-control" name="assessment-order">
+                    <input type="text" class="form-control" name="assessment-order" id="assessment-order">
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="assessment-short-title" class="font-weight-bold text-gray-800 col-form-label">Κωδικός:</label>
-                    <input type="text" class="form-control" name="assessment-short-title">
+                    <input type="text" class="form-control" id="assessment-short-title" name="assessment-short-title">
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-6 required">
                     <label for="assessment-title" class="font-weight-bold text-gray-800 col-form-label">Τίτλος:</label>
-                    <input type="text" class="form-control" name="assessment-title">
+                    <input type="text" class="form-control" name="assessment-title" id="assessment-title">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="assessment-title-en" class="font-weight-bold text-gray-800 col-form-label">Τίτλος (ΕΝ):</label>
@@ -120,7 +124,7 @@
                         <td><?php echo $method['assessment_short_title']; ?></td>
                         <td><?php echo $method['assessment_title']; ?></td>
                         <td><?php echo $method['assessment_title_eng']; ?></td>
-                        <td class='editField'><a href="edit_course_assessment_methods.php?assessment_id=<?php echo $method['assessment_short_title'];?>"><i class="far fa-edit"></i></a></td>
+                        <td class='editField'><a href="edit_course_assessment_methods.php?assessment_id=<?php echo $method['assessment_short_title'];?>"><i class="far fa-edit text-warning"></i></a></td>
                         <td class='editField'><a href="admin_course_assessment_methods.php?assessment_id=<?php echo $method['assessment_short_title'];?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις τη συγκεκριμένη μέθοδο αξιολόγησης;');"><i class='fas fa-trash-alt delete-item'></i></td>
                       </tr>
 					          <?php endforeach; ?>

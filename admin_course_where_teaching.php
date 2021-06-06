@@ -15,6 +15,12 @@
   // Διαγραφή 
   if(isset($_GET['where_id'])){
     $where_id = $_GET['where_id'];
+
+    $null = "wh-null";
+    $sql = "UPDATE lesson set where_id = ? WHERE where_id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$null,$where_id]);
+
     $sql = "DELETE FROM whereteaching WHERE where_short_title = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$where_id]);
@@ -72,19 +78,23 @@
           </p>
           <div class="collapse" id="newWhereTeaching">
             <div class="card card-body">
-              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" id="new-where-teaching-form">
+                <div class="form-row error-message error-lesson-where-teaching">
+									<div class="alert alert-danger" role="alert">
+									</div>
+							  </div>
                 <div class="form-row">
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-2 required">
                     <label for="where-short-title" class="font-weight-bold text-gray-800 col-form-label">Κωδικός:</label>
-                    <input type="text" class="form-control" name="where-short-title">
+                    <input type="text" class="form-control" name="where-short-title" id="where-short-title">
                   </div>
-                  <div class="form-group col-md-5">
+                  <div class="form-group col-md-5 required">
                     <label for="where-title" class="font-weight-bold text-gray-800 col-form-label">Τίτλος:</label>
-                    <input type="text" class="form-control" name="where-title">
+                    <input type="text" class="form-control" name="where-title" id="where-title">
                   </div>
                   <div class="form-group col-md-5">
                     <label for="where-title-en" class="font-weight-bold text-gray-800 col-form-label">Τίτλος (ΕΝ):</label>
-                    <input type="text" class="form-control" name="where-title-en">
+                    <input type="text" class="form-control" name="where-title-en" id="where-title-eng">
                   </div>
                 </div>
                 <div class="form-group">
@@ -115,7 +125,7 @@
                         <td><?php echo $place['where_short_title']; ?></td>
                         <td><?php echo $place['where_title']; ?></td>
                         <td><?php echo $place['where_title_eng']; ?></td>
-                        <td class='editField'><a href="edit_where_teaching.php?where_id=<?php echo $place['where_short_title'];?>"><i class="far fa-edit"></i></a></td>
+                        <td class='editField'><a href="edit_where_teaching.php?where_id=<?php echo $place['where_short_title'];?>"><i class="far fa-edit text-warning"></i></a></td>
                         <td class='editField'><a href="admin_course_where_teaching.php?where_id=<?php echo $place['where_short_title'];?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις τον συγκεκριμένο αντικείμενο;');"><i class='fas fa-trash-alt delete-item'></i></td>
                       </tr>
 					          <?php endforeach; ?>

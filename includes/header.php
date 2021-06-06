@@ -28,10 +28,10 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+    <ul class="navbar-nav  bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <div class="sticky-top">
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+      <a class="sidebar-brand  d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon">
           <img src="img/new-logo.png" height="50" width="50" class="fas">
         </div>
@@ -41,25 +41,30 @@
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
-      <!-- Nav Item - Dashboard
-      <li class="nav-item">
-        <a class="nav-link" href="dashboard.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Πίνακας Ελέγχου</span></a>
-      </li> -->
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-
+      
       <!-- Heading -->
-      <div class="sidebar-heading">Μαθηματα</div>
+      <div class="sidebar-heading">ΠΡΟΒΟΛΗ</div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="index.php">
-          <!-- <i class="fas fa-fw fa-book"></i> -->
+        <a class="nav-link" href="lessons.php">
           <i class="fas fa-fw fa-bookmark"></i>
           <span>Λίστα Μαθημάτων</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="books.php">
+          <i class="fas fa-fw fa-book"></i>
+          <span>Λίστα Συγγραμμάτων</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="teachers.php">
+        <i class="fas fa-fw fa-chalkboard-teacher"></i>
+          <span>Λίστα Καθηγητών</span>
         </a>
       </li>
 
@@ -67,7 +72,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Κατάλογος Μαθημάτων</span>
+          <span>Κατηγορίες Μαθημάτων</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
@@ -79,13 +84,16 @@
               $categories = $stmt->fetchAll();
 
               foreach($categories as $category){
-                if($category['cat_short_title'] == "Κ")
-                  $text = "Kορμού";
-                elseif($category['cat_short_title'] == 'ΕΕ')
-                  $text = "Ελεύθερης Επιλογής";
-                else  
-                  $text = $category['cat_short_title'];
-                echo "<a class='collapse-item' href='list_courses.php?category_id={$category['cat_short_title']}'>{$text}</a>";
+                if($category['cat_short_title'] !== "Null"){
+                  if($category['cat_short_title'] == "Κ")
+                    $text = "Kορμού";
+                  elseif($category['cat_short_title'] == 'ΕΕ')
+                    $text = "Ελεύθερης Επιλογής";
+                  else  
+                    $text = $category['cat_short_title'];
+                  echo "<a class='collapse-item' href='list_courses.php?category_id={$category['cat_short_title']}'>{$text}</a>";
+                }
+                
               }
             ?>
           </div>
@@ -128,7 +136,7 @@
             <a class='collapse-item' href='admin_course_categories.php'>Κατηγορίες Μαθημάτων</a>
             <a class='collapse-item' href='admin_course_types.php'>Τύποι Μαθημάτων</a>
             <a class='collapse-item' href='admin_course_where_teaching.php'>Τρόποι Παράδοσης</a>
-            <a class='collapse-item' href='admin_course_abilities.php'>Αποκτόμενες Ικανότητες</a>
+            <a class='collapse-item' href='admin_course_abilities.php'>Αποκτώμενες Ικανότητες</a>
             <a class='collapse-item' href='admin_course_assessment_methods.php'>Μέθοδοι Αξιολόγησης</a>
             <a class='collapse-item' href='admin_course_teaching_methods.php'>Μέθοδοι Διδασκαλίας</a>
             <a class='collapse-item' href='admin_course_tech_methods.php'>Τεχνολογίες Διδασκαλίας</a>
@@ -137,40 +145,35 @@
       </li>
       <!-- Διαχείριση Συγγραμμάτων -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#manageBooks" aria-expanded="true" aria-controls="collapsePages">
-        <i class="fas fa-fw fa-book"></i>
+        <a class="nav-link" href="admin_books.php">
+          <i class="fas fa-fw fa-book"></i>
           <span>Συγγραμμάτων</span>
         </a>
-        <div id="manageBooks" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class='collapse-item' href='admin_books.php'>Βιβλιογραφία</a>
-          </div>
-        </div>
       </li>
+    
       <!-- Διαχείριση Καθηγητών -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#manageTeachers" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link" href="admin_teachers.php">
         <i class="fas fa-fw fa-chalkboard-teacher"></i>
-          <span>Καθηγητών</span>
+          <span>Λίστα Καθηγητών</span>
         </a>
-        <div id="manageTeachers" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class='collapse-item' href='admin_teachers.php'>Καθηγητές</a>
-            <a class='collapse-item' href='#'>Ανάθεση Μαθημάτων</a>
-          </div>
-        </div>
+      </li>
+
+      <!-- Log -->
+      <li class="nav-item">
+        <a class="nav-link" href="log.php">
+        <i class="fas fa-fw fa-wrench"></i>
+          <span>Ενημερώσεις</span>
+        </a>
       </li>
       <?php endif; ?>
-
-
       <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
+      <div class="text-center d-none d-md-inline test">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
-
+    </div>
     </ul>
     <!-- End of Sidebar -->
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 

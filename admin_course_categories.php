@@ -14,6 +14,11 @@
 <?php
   if(isset($_GET['category_id'])){
     $category_id = $_GET['category_id'];
+    $null = "Null";
+    $sql = "UPDATE lesson set cat_id = ? WHERE cat_id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$null,$category_id]);
+
     $sql = "DELETE FROM lesson_cat WHERE cat_short_title = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$category_id]);
@@ -72,34 +77,38 @@
           </p>
           <div class="collapse" id="newCategory">
             <div class="card card-body">
-              <form action="<?php $_SERVER["PHP_SELF"]; ?>" method="POST">
+              <form action="<?php $_SERVER["PHP_SELF"]; ?>" method="POST" id="new-category-form">
+                <div class="form-row error-message error-lesson-category">
+									<div class="alert alert-danger" role="alert">
+									</div>
+							  </div>
                 <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label for="category-id" class="font-weight-bold text-gray-800 col-form-label">Κωδικός Κατηγορίας:</label>
-                    <input type="text" class="form-control" name="category-id">
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="category-id-en" class="font-weight-bold text-gray-800 col-form-label">Κωδικός Κατηγορίας(En):</label>
-                    <input type="text" class="form-control" name="category-id-en">
-                  </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 required">
                     <label for="category-id" class="font-weight-bold text-gray-800 col-form-label">A/A:</label>
-                    <input type="text" class="form-control" name="category-order">
+                    <input type="text" class="form-control" name="category-order" id="category-order">
+                  </div>
+                  <div class="form-group col-md-4 required">
+                    <label for="category-id" class="font-weight-bold text-gray-800 col-form-label">Κωδικός Κατηγορίας:</label>
+                    <input type="text" class="form-control" name="category-id" id="category-id">
+                  </div>
+                  <div class="form-group col-md-4 required">
+                    <label for="category-id-en" class="font-weight-bold text-gray-800 col-form-label">Κωδικός Κατηγορίας(En):</label>
+                    <input type="text" class="form-control" name="category-id-en" id="category-id-eng">
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-6 required">
                     <label for="category-id" class="font-weight-bold text-gray-800 col-form-label">Τίτλος Κατηγορίας:</label>
-                    <input type="text" class="form-control" name="category-title">
+                    <input type="text" class="form-control" name="category-title" id="category-title">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="category-id-en" class="font-weight-bold text-gray-800 col-form-label">Τίτλος Κατηγορίας(En):</label>
-                    <input type="text" class="form-control" name="category-title-en">
+                    <input type="text" class="form-control" name="category-title-en" id="category-title-eng">
                   </div>
                 </div>
                 <!-- <div class="form-row"> -->
                   <div class="form-group">
-                    <input type="submit" class="btn btn-success float-right" name="submit">
+                    <input type="submit" class="btn btn-success float-right" name="submit" id="add-new-category">
                   </div>
                 <!-- </div> -->
                 
@@ -126,9 +135,9 @@
                   ?>  
                       <tr>
                         <td><?php echo $category['cat_order']; ?></td>
-                        <td><a href="lesson.php?lesson_id=<?php echo $category['cat_short_title']; ?>" class="text-gray-600"><?php echo $category['cat_short_title']; ?></a></td>
+                        <td><?php echo $category['cat_short_title']; ?></td>
                         <td><?php echo $category['cat_title']; ?></td>
-                        <td class='editField'><a href="edit_course_categories.php?category_id=<?php echo $category['cat_short_title'];?>"><i class="far fa-edit"></i></a></td>
+                        <td class='editField'><a href="edit_course_categories.php?category_id=<?php echo $category['cat_short_title'];?>"><i class="far fa-edit  text-warning"></i></a></td>
                         <td class='editField'><a href="admin_course_categories.php?category_id=<?php echo $category['cat_short_title'];?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις την κατηγορία;');"><i class='fas fa-trash-alt delete-item'></i></td>
                       </tr>
 					          <?php endforeach; ?>
@@ -142,7 +151,7 @@
 
       </div>
       <!-- End of Main Content -->
-
+      
      
 <?php include "includes/footer.php"; ?>
 

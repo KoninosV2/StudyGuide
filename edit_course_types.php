@@ -32,24 +32,29 @@
 				<?php echo $type['type_title'];?> [<?php echo $type['type_short_title']; ?>]
 			</h1>
     </div>
-    <div class="card shadow border-warning mb-3">
+    <div class="card shadow mb-3">
       <div class="card-body edit-lesson">
-        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" id="update-lesson-type"> 
 					<!-- <div class="form-row"> -->
-						<div class="form-group">
+            <div class="form-row error-message error-lesson-type-update">
+							<div class="alert alert-danger" role="alert">
+							</div>
+						</div>
+						<div class="form-group required">
 							<label for="type-order" class="col-form-label font-weight-bold text-gray-800">Κωδικός:</label>
 							<input type="text" name="type-short-title" class="font-weight-normal form-control" value="<?php echo $type['type_short_title']; ?>" readonly>
 						</div>
-						<div class="form-group">
+						<div class="form-group required">
 							<label for="type-title" class="col-form-label font-weight-bold text-gray-800">Τίτλος:</label>
-							<input type="text" name="type-title" class="font-weight-normal form-control" value="<?php echo $type['type_title']; ?>">
+							<input type="text" name="type-title" id="type-title" class="font-weight-normal form-control" value="<?php echo $type['type_title']; ?>">
 						</div>
             <div class="form-group">
 							<label for="type-title-en" class="col-form-label font-weight-bold text-gray-800">Τίτλος (EN):</label>
-							<input type="text" name="type-title-en" class="font-weight-normal form-control" value="<?php echo $type['type_title_eng']; ?>">
+							<input type="text" name="type-title-en" id="type-title-en" class="font-weight-normal form-control" value="<?php echo $type['type_title_eng']; ?>">
 						</div>
 			    <!-- </div> -->
 					<button type="submit" name="type-update" class="btn btn-primary float-right">Ενημέρωση</button>
+          <input type="reset" class="btn btn-warning float-right mr-3" value="Επαναφορά">
         </form>
 			</div>
     </div>          	

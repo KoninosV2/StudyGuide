@@ -19,7 +19,7 @@
     $_SESSION['surname'] = $teacher['surname'];
     $_SESSION['email'] = $teacher['email'];
 
-    if($teacher['id'] == 'Μαλαμάτος'){
+    if($teacher['role'] == 'admin'){
       $_SESSION['role'] = 'admin';
     }  
     else{

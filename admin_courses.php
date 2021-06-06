@@ -38,10 +38,14 @@
       <div class="my-3">
         <h1 class="h3 mb-0 text-gray-800">Λίστα Μαθημάτων</h1>
       </div>
-      <!-- Πίνακας Μαθημάτων -->
       <div class="shadow">
+        
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Μαθήματα</h6>
+          <p>
+            <a class="btn btn-primary" href="add_new_lesson.php" role="button">
+              Εισαγωγή Μαθήματος
+            </a>
+          </p>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -64,8 +68,8 @@
                         <td><a href="lesson.php?lesson_id=<?php echo $lesson['lesson_code']; ?>" class="text-gray-600"><?php echo $lesson['lesson_code']; ?></a></td>
                         <td><?php echo $lesson['title']; ?></td>
                         <td><?php echo $lesson['cat_title']; ?></td>
-                        <td class='editField'><a href="edit_lesson.php?lesson_id=<?php echo $lesson['lesson_code'];?>"><i class="far fa-edit"></i></a></td>
-                        <td class='editField'><a href="delete_items.php?type=lesson&lesson_id=<?php echo $lesson['lesson_code'];?>"><i class='fas fa-trash-alt delete-item'></i></td>
+                        <td class='editField'><a href="edit_lesson.php?lesson_id=<?php echo $lesson['lesson_code'];?>"><i class="far fa-edit text-warning"></i></a></td>
+                        <td class='editField'><a href="edit_lesson.php?delete_id=<?php echo $lesson['lesson_code'];?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις το συγκεκριμένο μαθήμα;');"><i class='fas fa-trash-alt delete-item'></i></td>
                       </tr>
 					          <?php endforeach; ?>
                   </tbody>
@@ -84,9 +88,13 @@
     $('#adminCourseTable').DataTable();
 	});
 
-  $('tbody>tr').click( function() {
-    window.location = $(this).find('a').attr('href');
-    }).hover( function() {
-    $(this).toggleClass('hover');
+  $('tbody tr td:not(:last-child, :nth-child(4))').click( function() {
+    var tr = $(this).closest('tr');
+    window.location = tr.find('a').attr('href');
+  });
+  $('tbody tr td:not(:last-child, :nth-child(4))').hover(function() {
+    var tr = $(this).closest('tr');
+   tr.toggleClass('hover');
+    console.log($(this));
   });
 </script>
