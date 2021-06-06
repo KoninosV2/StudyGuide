@@ -108,7 +108,7 @@
                 </div>
                 <!-- <div class="form-row"> -->
                   <div class="form-group">
-                    <input type="submit" class="btn btn-success float-right" name="submit" id="add-new-category">
+                    <input type="submit" class="btn btn-success float-right" name="submit" id="add-new-category" value="Προσθήκη">
                   </div>
                 <!-- </div> -->
                 
