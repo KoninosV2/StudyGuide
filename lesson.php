@@ -448,7 +448,12 @@ if (isset($_GET['lesson_id'])) {
 						if ($book['id'] === "articles" || $book['id'] === "notes")
 							$book_list .= "<li class='list-group-item'>" . $book['title'] . "</li>";
 						else {
-							$book_details = $book['authors'] . ", " . $book['title'] . ', ' . $book['edition'] . 'η έκδοση, ' .	 $book['publisher'] . ', ' . $book['year'] . ', Κωδικός στον Εύδοξο: ' . $book['eudoxus_id'];
+							$book_details = $book['authors'] . ", <b>" .
+								$book['title'] . '</b>, ' .
+								$book['edition'] . 
+								'η έκδοση, ' . $book['publisher'] . ', ' .
+								$book['year'] .
+								', Κωδικός στον Εύδοξο: ' . $book['eudoxus_id'];
 							$book_list .= "<li class='list-group-item'>" . $book_details . "</li>";
 						}
 					$book_list .= "</ul>";
