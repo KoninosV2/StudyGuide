@@ -36,7 +36,10 @@
         "chart.js": "2.9.4",
         "datatables.net-bs4": "1.10.19",
         "jquery": "3.3.1",
-        "jquery.easing": "^1.4.1"
+        "jquery.easing": "^1.4.1",
+        "trim-newlines": ">=3.0.1",
+        "glob-parent": ">=5.1.2",
+        "ws": ">=6.2.2"
     },
     "devDependencies": {
         "browser-sync": "2.26.3",
