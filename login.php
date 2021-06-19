@@ -1,5 +1,5 @@
 <?php
-	include 'includes/dbcon.php';
+include 'includes/dbcon.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,8 +36,8 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row justify-content-center">
-			<div class="col-xl-8">
-              <div class="p-5">
+              <div class="col-xl-8">
+                <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
@@ -55,9 +55,9 @@
                       </div>
                     </div>
                     <input name="login" type="submit" class="btn btn-primary btn-user btn-block"></input>
-                    </form>
-                 
-              </div>
+                  </form>
+
+                </div>
               </div>
             </div>
           </div>
