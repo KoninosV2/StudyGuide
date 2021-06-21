@@ -1,7 +1,7 @@
 <?php
 session_start();
 $host = 'localhost';
-include("../dbcon/db_settings.php");  
+include("/dbcon/db_settings.php");  
 try {
     $dsn = "mysql:host=$host;dbname=$dbname";
     $pdo = new PDO($dsn, $user, $pass);
