@@ -1,9 +1,7 @@
 <?php
 session_start();
 $host = 'localhost';
-$dbname = 'dit13023_app';
-$user = "root";
-$pass = "";
+include("../dbcon/db_settings.php");  
 try {
     $dsn = "mysql:host=$host;dbname=$dbname";
     $pdo = new PDO($dsn, $user, $pass);
@@ -15,3 +13,5 @@ try {
     print "Error!: " . $e->getMessage() . "<br/>";
     die();
 }
+
+unset ($dbname, $user, $pass); 
