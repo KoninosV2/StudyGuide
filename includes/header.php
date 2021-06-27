@@ -20,6 +20,14 @@
   <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 
+  <!-- favicon-->
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
+  <link rel="manifest" href="../img/favicon/site.webmanifest">
+  <link rel="mask-icon" href="../img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#ffffff">
+
 </head>
 
 <body id="page-top">
@@ -110,11 +118,11 @@
             </a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="teacher_books.php">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Συγγράμματα</span>
-          </a>
-        </li>
+            <a class="nav-link" href="teacher_books.php">
+              <i class="fas fa-fw fa-book"></i>
+              <span>Συγγράμματα</span>
+            </a>
+          </li>
         <?php endif; ?>
 
         <!-- Εμφανίζεται όταν έχει συνδεθεί κάποιος καθηγητής -->
