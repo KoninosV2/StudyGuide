@@ -1,32 +1,30 @@
-<?php 
-  include "dbcon.php";
-  
-  // Παίρνουμε το email και το password που έδωσε ο χρήστης
-  $user_email = $_POST['email'];
-  $user_password = $_POST['password'];
+<?php
+include "dbcon.php";
 
-  $sql = "SELECT * FROM teacher WHERE email = ?";
-  $stmt = $pdo->prepare($sql);
-  $stmt->execute([$user_email]);
-  $teacher = $stmt->fetch();
+// Παίρνουμε το email και το password που έδωσε ο χρήστης
+$user_email = $_POST['email'];
+$user_password = $_POST['password'];
 
-  $db_email = $teacher['email'];
-  $db_password = '123456';
+$sql = "SELECT * FROM teacher WHERE email = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$user_email]);
+$teacher = $stmt->fetch();
 
-  if($user_email === $db_email && $user_password == $db_password){
+$db_email = $teacher['email'];
+$db_password = '123456';
+
+if ($user_email === $db_email && $user_password == $db_password) {
     $_SESSION['user_id'] = $teacher['id'];
     $_SESSION['name'] = $teacher['name'];
     $_SESSION['surname'] = $teacher['surname'];
     $_SESSION['email'] = $teacher['email'];
 
-    if($teacher['role'] == 'admin'){
-      $_SESSION['role'] = 'admin';
-    }  
-    else{
-      $_SESSION['role'] = 'user';
+    if ($teacher['role'] == 'admin') {
+        $_SESSION['role'] = 'admin';
+    } else {
+        $_SESSION['role'] = 'user';
     }
     header("Location: ../teacher_lessons.php");
-    
-  }else{
+} else {
     header("Location: ../login.php");
-  }
+}

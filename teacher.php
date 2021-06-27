@@ -11,10 +11,10 @@ if (isset($_GET['teacher_id'])) {
 	$teacher = $stmt->fetch();
 
 	$sql = "SELECT lesson.lesson_code, title, semester, teacher2lesson.hours_teaching, teacher2lesson.multiplicity_teaching,
-									teacher2lesson.hours_lab, teacher2lesson.multiplicity_lab, teacher2lesson.hours_exer, teacher2lesson.multiplicity_exer 
-									FROM lesson, teacher2lesson 
-						WHERE teacher2lesson.lesson_code = lesson.lesson_code 
-						AND teacher_id = ?";
+			teacher2lesson.hours_lab, teacher2lesson.multiplicity_lab, teacher2lesson.hours_exer, teacher2lesson.multiplicity_exer 
+			FROM lesson, teacher2lesson 
+			WHERE teacher2lesson.lesson_code = lesson.lesson_code 
+			AND teacher_id = ?";
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute([$teacher_id]);
 	$lessons = $stmt->fetchAll();
