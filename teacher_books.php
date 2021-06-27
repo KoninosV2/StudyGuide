@@ -31,9 +31,15 @@ if (isset($_GET['book_id'])) {
 ?>
 
 <?php
-$sql = "SELECT * FROM book";
+//$sql = "SELECT * FROM book";
+$sql = "SELECT id, eudoxus_id, book.title, authors, lesson.title 
+        FROM book LEFT JOIN book2lesson ON book.id = book2lesson.book_id 
+        INNER JOIN teacher2lesson ON book2lesson.lesson_code = teacher2lesson.lesson_code 
+        INNER JOIN lesson ON teacher2lesson.lesson_code = lesson.lesson_code 
+        WHERE teacher2lesson.teacher_id = ? 
+        ORDER BY book2lesson.lesson_code , book_order";
 $stmt = $pdo->prepare($sql);
-$stmt->execute();
+$stmt->execute([$_SESSION['user_id']]);
 $number_of_books = $stmt->rowCount();
 $books = $stmt->fetchAll();
 ?>
@@ -132,6 +138,7 @@ $books = $stmt->fetchAll();
               <th>Κωδικός</th>
               <th>Τίτλος</th>
               <th>Συγγραφείς</th>
+              <th>Μάθημα</th>
               <th>Τροποποίση</th>
               <th>Διαγραφή</th>
             </tr>
@@ -143,10 +150,11 @@ $books = $stmt->fetchAll();
             ?>
               <tr>
                 <td><a href=book.php?book_id=<?php echo $book['id']; ?> class="text-gray-600"><?php echo $book['id']; ?></a></td>
-                <td><?php echo $book['title']; ?></td>
+                <td><?php echo $book['book.title']; ?></td>
                 <td><?php echo $book['authors']; ?></td>
+                <td><?php echo $book['lesson.title']; ?></td>
                 <td class='editField'><a href="edit_book.php?book_id=<?php echo $book['id']; ?>"><i class="far fa-edit text-warning"></i></a></td>
-                <td class='editField'><a href="admin_books.php?book_id=<?php echo $book['id']; ?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις το συγκεκριμένο βιβλίο;');"><i class='fas fa-trash-alt delete-item'></i></td>
+                <td class='editField'><a href="teacher_books.php?book_id=<?php echo $book['id']; ?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις το συγκεκριμένο βιβλίο;');"><i class='fas fa-trash-alt delete-item'></i></td>
               </tr>
             <?php endforeach; ?>
           </tbody>
