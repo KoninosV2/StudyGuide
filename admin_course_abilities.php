@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
   </div>
   <div class="row">
     <div class="col-xl-3 col-md-6 mb-4">
-      <a role="button" href="#" class="btn-outline-light card border-left-primary shadow py-2">
+      <a role="button" href="<?php $_SERVER['PHP_SELF']; ?>" class="btn-outline-light card border-left-primary shadow py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
