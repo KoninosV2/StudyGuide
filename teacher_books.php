@@ -31,8 +31,7 @@ if (isset($_GET['book_id'])) {
 ?>
 
 <?php
-//$sql = "SELECT * FROM book";
-$sql = "SELECT id, eudoxus_id, book.title, authors, lesson.title 
+$sql = "SELECT id, eudoxus_id, book.title title, authors, lesson.title lesson_title 
         FROM book LEFT JOIN book2lesson ON book.id = book2lesson.book_id 
         INNER JOIN teacher2lesson ON book2lesson.lesson_code = teacher2lesson.lesson_code 
         INNER JOIN lesson ON teacher2lesson.lesson_code = lesson.lesson_code 
@@ -51,7 +50,7 @@ $books = $stmt->fetchAll();
   </div>
   <div class="row">
     <div class="col-xl-3 col-md-6 mb-4">
-      <a role="button" href="#" class="btn-outline-light card border-left-primary shadow py-2">
+      <a role="button" href="<?php $_SERVER['PHP_SELF']; ?>" class="btn-outline-light card border-left-primary shadow py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
@@ -150,9 +149,9 @@ $books = $stmt->fetchAll();
             ?>
               <tr>
                 <td><a href=book.php?book_id=<?php echo $book['id']; ?> class="text-gray-600"><?php echo $book['id']; ?></a></td>
-                <td><?php echo $book['book.title']; ?></td>
+                <td><?php echo $book['title']; ?></td>
                 <td><?php echo $book['authors']; ?></td>
-                <td><?php echo $book['lesson.title']; ?></td>
+                <td><?php echo $book['lesson_title']; ?></td>
                 <td class='editField'><a href="edit_book.php?book_id=<?php echo $book['id']; ?>"><i class="far fa-edit text-warning"></i></a></td>
                 <td class='editField'><a href="teacher_books.php?book_id=<?php echo $book['id']; ?>" onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις το συγκεκριμένο βιβλίο;');"><i class='fas fa-trash-alt delete-item'></i></td>
               </tr>
