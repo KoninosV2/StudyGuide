@@ -56,12 +56,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="books.php">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Λίστα Συγγραμμάτων</span>
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="teachers.php">
             <i class="fas fa-fw fa-chalkboard-teacher"></i>
             <span>Λίστα Καθηγητών</span>
@@ -115,6 +109,12 @@
               <span>Μαθημάτα</span>
             </a>
           </li>
+          <li class="nav-item">
+          <a class="nav-link" href="teacher_books.php">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Συγγράμματα</span>
+          </a>
+        </li>
         <?php endif; ?>
 
         <!-- Εμφανίζεται όταν έχει συνδεθεί κάποιος καθηγητής -->
